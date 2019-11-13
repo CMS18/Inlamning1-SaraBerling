@@ -1,4 +1,6 @@
-﻿@{
+﻿@model Uppgift1UI.Models.HomeViewModel
+
+@{
     ViewData["Title"] = "Saras Bank";
 }
 
@@ -6,3 +8,23 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+<h2>KUNDER</h2>
+<ul>
+    @foreach (var customer in Model.Customers)
+    {
+        <li>
+            <p>Name: @customer.Name</p>
+            <p>Customer Id: @customer.Id</p>
+            <h3>Accounts: </h3>
+            <ul>
+                @foreach (var account in customer.Accounts)
+                {
+                    <li>
+                        <p>@account.AccountId: @account.Balance SEK</p>
+                    </li>
+                }
+            </ul>
+        </li>
+    }
+</ul>
+

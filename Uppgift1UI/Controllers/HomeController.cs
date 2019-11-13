@@ -12,7 +12,11 @@ namespace Uppgift1UI.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            var bankRepo = new BankRepository();
+            var vm = new HomeViewModel();
+            vm.Customers = bankRepo.GetAllCustomers();
+
+            return View(vm);
         }
 
         public IActionResult Privacy()

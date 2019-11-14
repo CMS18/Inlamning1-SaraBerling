@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,7 +8,7 @@ namespace Uppgift1UI.Models
 {
     public class BankRepository
     {
-        private static List<Customer> Customers = new List<Customer>
+        public List<Customer> Customers = new List<Customer>
         {
             new Customer
             {
@@ -55,46 +56,25 @@ namespace Uppgift1UI.Models
             return Customers;
         }
 
-        public string Deposit(int accountNr, decimal depositAmount)
+        public void Deposit(int accountNr, decimal amount)
         {
-            string result = "Account was not found.";
             var account = Customers.SelectMany(c => c.Accounts).SingleOrDefault(a => a.AccountId == accountNr);
 
-            if (account != null)
-            {
-                if (depositAmount > 0)
-                {
-                    account.Balance += depositAmount;
-                    result = depositAmount + "SEK was successfully deposited to account " + account;
-                }
-                else
-                {
-                    result = "Amount has to be more the 0.";
-                }
-            }
+            if (account == null || amount < 0) throw new Exception();
 
-            return result;
+            account.Balance += amount;
+
+
+
         }
 
-        public string Withdrawal(int accountNr, decimal withdrawalAmount)
+        public void Withdrawal(int accountNr, decimal amount)
         {
-            string result = "Account was not found.";
             var account = Customers.SelectMany(c => c.Accounts).SingleOrDefault(a => a.AccountId == accountNr);
 
-            if (account != null)
-            {
-                if (withdrawalAmount > 0)
-                {
-                    account.Balance -= withdrawalAmount;
-                    result = withdrawalAmount + "SEK was successfully withdrawn from account " + account;
-                }
-                else
-                {
-                    result = "Amount has to be more the 0.";
-                }
-            }
-
-            return result;
+            if (amount > account.Balance || amount < 0) throw new ArgumentOutOfRangeException();
+            account.Balance -= amount;
         }
     }
+
 }

@@ -1,0 +1,20 @@
+﻿<form method="post">
+    <div>
+        <label>From Account:</label>
+        <input type="text" name="fromAcc" />
+    </div>
+    <div>
+        <label>To Account:</label>
+        <input type="text" name="toAcc" />
+    </div>
+    <div>
+        <label>Amount:</label>
+        <input type="text" name="amount" />
+    </div>
+    <button type="submit" asp-controller="Account" asp-action="Transfer">Transfer</button>
+</form>
+
+@if (TempData["result"] != null)
+{
+    <h2>@TempData["result"]</h2>
+}

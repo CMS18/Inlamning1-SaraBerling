@@ -8,7 +8,7 @@ namespace Uppgift1UI.Models
 {
     public class BankRepository
     {
-        public List<Customer> Customers = new List<Customer>
+        private static List<Customer> Customers = new List<Customer>
         {
             new Customer
             {

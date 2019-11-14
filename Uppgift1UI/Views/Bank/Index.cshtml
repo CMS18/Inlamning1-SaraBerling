@@ -1,0 +1,17 @@
+﻿<form method="post">
+    <div>
+        <label>Account number:</label>
+        <input type="text" name="accountNr" />
+    </div>
+    <div>
+        <label>Amount:</label>
+        <input type="text" name="amount" />
+    </div>
+    <button type="submit" asp-controller="Bank" asp-action="Deposit">Deposit</button>
+    <button type="submit" asp-controller="Bank" asp-action="Withdrawal">Withdrawal</button>
+</form>
+
+@if(TempData["result"] != null)
+{
+    <h2>@TempData["result"]</h2>
+}
